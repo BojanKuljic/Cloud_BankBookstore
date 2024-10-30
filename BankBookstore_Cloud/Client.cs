@@ -12,14 +12,14 @@ using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 using Microsoft.ServiceFabric.Data;
 
-namespace BankBookstore_Cloud
+namespace Client
 {
     /// <summary>
     /// The FabricRuntime creates an instance of this class for each service type instance.
     /// </summary>
-    internal sealed class BankBookstore_Cloud : StatelessService
+    internal sealed class Client : StatelessService
     {
-        public BankBookstore_Cloud(StatelessServiceContext context)
+        public Client(StatelessServiceContext context)
             : base(context)
         { }
 

@@ -1,8 +1,8 @@
-using BankBookstore_Cloud.Models;
+using Client.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace BankBookstore_Cloud.Controllers
+namespace Client.Controllers
 {
     public class HomeController : Controller
     {

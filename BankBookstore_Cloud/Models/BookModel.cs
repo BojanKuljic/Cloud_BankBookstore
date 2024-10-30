@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Client.Models
 {
+    [DataContract]
     public class BookModel
     {
      

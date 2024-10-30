@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Services.Runtime;
 
-namespace BankBookstore_Cloud
+namespace Client
 {
-    [EventSource(Name = "MyCompany-Cloud_BankBookstore-BankBookstore_Cloud")]
+    [EventSource(Name = "MyCompany-Cloud_BankBookstore-Client")]
     internal sealed class ServiceEventSource : EventSource
     {
         public static readonly ServiceEventSource Current = new ServiceEventSource();

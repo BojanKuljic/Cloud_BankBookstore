@@ -5,11 +5,11 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "Cloud_BankBookstore", "Cloud_BankBookstore\Cloud_BankBookstore.sfproj", "{F9014B8B-012A-499D-98D9-4A80A39084F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankBookstore_Cloud", "BankBookstore_Cloud\BankBookstore_Cloud.csproj", "{9BCDACFD-5797-4B47-8C81-D2B6B36755ED}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{18F8F8E3-998F-4470-8E64-2D7D7CFCE1FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "BankBookstore_Cloud\Client.csproj", "{9BCDACFD-5797-4B47-8C81-D2B6B36755ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{DC89C437-3916-40D6-96B7-B2356494D809}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Validation", "Validation\Validation.csproj", "{B16E47F3-9B0B-4D08-AE60-4CB980E7788F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,14 +39,6 @@ Global
 		{9BCDACFD-5797-4B47-8C81-D2B6B36755ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9BCDACFD-5797-4B47-8C81-D2B6B36755ED}.Release|x64.ActiveCfg = Release|Any CPU
 		{9BCDACFD-5797-4B47-8C81-D2B6B36755ED}.Release|x64.Build.0 = Release|Any CPU
-		{18F8F8E3-998F-4470-8E64-2D7D7CFCE1FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18F8F8E3-998F-4470-8E64-2D7D7CFCE1FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18F8F8E3-998F-4470-8E64-2D7D7CFCE1FB}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{18F8F8E3-998F-4470-8E64-2D7D7CFCE1FB}.Debug|x64.Build.0 = Debug|Any CPU
-		{18F8F8E3-998F-4470-8E64-2D7D7CFCE1FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18F8F8E3-998F-4470-8E64-2D7D7CFCE1FB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{18F8F8E3-998F-4470-8E64-2D7D7CFCE1FB}.Release|x64.ActiveCfg = Release|Any CPU
-		{18F8F8E3-998F-4470-8E64-2D7D7CFCE1FB}.Release|x64.Build.0 = Release|Any CPU
 		{DC89C437-3916-40D6-96B7-B2356494D809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DC89C437-3916-40D6-96B7-B2356494D809}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC89C437-3916-40D6-96B7-B2356494D809}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -55,6 +47,14 @@ Global
 		{DC89C437-3916-40D6-96B7-B2356494D809}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DC89C437-3916-40D6-96B7-B2356494D809}.Release|x64.ActiveCfg = Release|Any CPU
 		{DC89C437-3916-40D6-96B7-B2356494D809}.Release|x64.Build.0 = Release|Any CPU
+		{B16E47F3-9B0B-4D08-AE60-4CB980E7788F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B16E47F3-9B0B-4D08-AE60-4CB980E7788F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B16E47F3-9B0B-4D08-AE60-4CB980E7788F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B16E47F3-9B0B-4D08-AE60-4CB980E7788F}.Debug|x64.Build.0 = Debug|Any CPU
+		{B16E47F3-9B0B-4D08-AE60-4CB980E7788F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B16E47F3-9B0B-4D08-AE60-4CB980E7788F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B16E47F3-9B0B-4D08-AE60-4CB980E7788F}.Release|x64.ActiveCfg = Release|Any CPU
+		{B16E47F3-9B0B-4D08-AE60-4CB980E7788F}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
