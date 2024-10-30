@@ -39,6 +39,7 @@
     <ProjectReference Include="..\BankBookstore_Cloud\BankBookstore_Cloud.csproj">
       <ServiceLaunchUrl>http://localhost:{ServicePort}/</ServiceLaunchUrl>
     </ProjectReference>
+    <ProjectReference Include="..\Client\Client.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
   <PropertyGroup>
