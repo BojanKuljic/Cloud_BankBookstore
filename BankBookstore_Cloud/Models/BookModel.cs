@@ -39,18 +39,7 @@ namespace Client.Models
         public int Quantity { get; set; }
 
 
-        //KONSTRUKTOR
-        public BookModel(int id, string title, string author, double price, string description, int pagesNumber, int quantity)
-        {
-            Id = id;
-            Title = title;
-            Author = author;
-            Price = price;
-            Description = description;
-            PagesNumber = pagesNumber;
-            Quantity = quantity;
-        }
-
+        //konstruktor i implementacija u  Bank
 
     }
 }

@@ -30,17 +30,7 @@ namespace Client.Models
         public double AccountBalance { get; set; }
 
 
-        //NE ZNAM DA LI OVAJ KONSTRUKTOR TREBA OVDE NALAZITI
-
-        public BankModel(int bankId, string bankName, string address, string phoneNumber, double accountBalance)
-        {
-            BankId = bankId;
-            BankName = bankName;
-            Address = address;
-            PhoneNumber = phoneNumber;
-            AccountBalance = accountBalance;
-            
-        }
+      //konstruktori i implementacija u bank service
         
 
     }
