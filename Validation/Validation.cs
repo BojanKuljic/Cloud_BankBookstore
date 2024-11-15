@@ -2,21 +2,47 @@ using Microsoft.ServiceFabric.Services.Communication.Runtime;
 
 using Microsoft.ServiceFabric.Services.Runtime;
 using System.Fabric;
-//using Common.Interfaces;
-
+using Common.Interfaces;
 
 namespace Validation
 {
-     internal sealed class Validation : StatelessService
+     internal sealed class Validation : StatelessService//, IValidation
     {
         public Validation(StatelessServiceContext context)
             : base(context)
         { }
 
+        //public Task<string> EnlistMoneyTransfer(long userSend, long userReceive, double amount)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
+        //public Task<string> EnlistPurchase(long bookId, uint count)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
+        //public Task<string> GetItem(long bookId)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-      
+        //public Task<string> GetItemPrice(long bookId)
+        //{
+        //    throw new NotImplementedException();
+
+        //}
+
+        //public Task<List<string>> ListAvailableItems()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public Task<List<string>> ListClients()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
         protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
         {
             return new ServiceInstanceListener[0];

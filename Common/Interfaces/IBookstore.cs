@@ -10,6 +10,8 @@ namespace Common.Interfaces
 
         Task<double> GetItemPrice(string bookId);
 
-        //void EnlistPurhase(string bookId, uint count);
+        Task<string> EnlistPurchase(long bookId, uint count);
+
+        Task<string> GetItem(long bookId);
     }
 }

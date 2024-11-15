@@ -29,13 +29,13 @@ namespace Bank
                 new BankClient { Id = "3", FirstName = "Jovana", LastName = "Jovanovic", MoneyAmount = 9700 }
             };
 
-            using var tx = StateManager.CreateTransaction();
+            using var transaction = StateManager.CreateTransaction();
             foreach (var client in entities)
             {
-                await bankDictionary.TryAddAsync(tx, client.Id.ToString(), client);
+                await bankDictionary.TryAddAsync(transaction, client.Id.ToString(), client);
             }
 
-            await tx.CommitAsync();
+            await transaction.CommitAsync();
         }
 
         // IBank

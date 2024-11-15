@@ -1173,7 +1173,7 @@
       this._isPaused = false;
       this._isSliding = false;
       this.touchTimeout = null;
-      this.touchStartX = 0;
+      this.touchStartransaction = 0;
       this.touchDeltaX = 0;
       this._config = this._getConfig(config);
       this._indicatorsElement = SelectorEngine.findOne(SELECTOR_INDICATORS, this._element);
@@ -1310,20 +1310,20 @@
     _addTouchEventListeners() {
       const start = event => {
         if (this._pointerEvent && (event.pointerType === POINTER_TYPE_PEN || event.pointerType === POINTER_TYPE_TOUCH)) {
-          this.touchStartX = event.clientX;
+          this.touchStartransaction = event.clientransaction;
         } else if (!this._pointerEvent) {
-          this.touchStartX = event.touches[0].clientX;
+          this.touchStartransaction = event.touches[0].clientransaction;
         }
       };
 
       const move = event => {
         // ensure swiping with one touch and not pinching
-        this.touchDeltaX = event.touches && event.touches.length > 1 ? 0 : event.touches[0].clientX - this.touchStartX;
+        this.touchDeltaX = event.touches && event.touches.length > 1 ? 0 : event.touches[0].clientransaction - this.touchStartransaction;
       };
 
       const end = event => {
         if (this._pointerEvent && (event.pointerType === POINTER_TYPE_PEN || event.pointerType === POINTER_TYPE_TOUCH)) {
-          this.touchDeltaX = event.clientX - this.touchStartX;
+          this.touchDeltaX = event.clientransaction - this.touchStartransaction;
         }
 
         this._handleSwipe();
