@@ -1,4 +1,6 @@
-﻿namespace Common
+﻿using Common.Models;
+
+namespace Common.Interfaces
 {
     public interface IBank : ITransaction
     {

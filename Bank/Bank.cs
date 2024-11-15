@@ -1,5 +1,6 @@
 ﻿using System.Fabric;
-using Common;
+using Common.Interfaces;
+using Common.Models;
 using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Remoting.Runtime;

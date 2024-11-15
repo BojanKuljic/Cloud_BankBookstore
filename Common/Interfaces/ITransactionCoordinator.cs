@@ -1,6 +1,7 @@
-﻿using Microsoft.ServiceFabric.Services.Remoting;
+﻿using Common.Models;
+using Microsoft.ServiceFabric.Services.Remoting;
 
-namespace Common
+namespace Common.Interfaces
 {
     public interface ITransactionCoordinator : IService
     {
