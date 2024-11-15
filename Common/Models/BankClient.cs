@@ -5,6 +5,8 @@ namespace Common.Models
     [DataContract]
     public class BankClient
     {
+        public object BankName;
+
         [DataMember]
         public string Id { get; set; }       // Account number
 
@@ -16,5 +18,6 @@ namespace Common.Models
 
         [DataMember]
         public double MoneyAmount { get; set; }
+       
     }
 }

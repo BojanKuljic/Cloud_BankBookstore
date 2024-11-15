@@ -157,7 +157,7 @@ $.validator.addMethod( "bankorgiroaccountNL", function( value, element ) {
 /**
  * BIC is the business identifier code (ISO 9362). This BIC check is not a guarantee for authenticity.
  *
- * BIC pattern: BBBBCCLLbbb (8 or 11 characters long; bbb is optional)
+ * BIC pattern: BBBbankclientCLLbbb (8 or 11 characters long; bbb is optional)
  *
  * Validation is case-insensitive. Please make sure to normalize input yourself.
  *
@@ -183,7 +183,7 @@ $.validator.addMethod( "bic", function( value, element ) {
  *
  * Where:
  *
- * T: 1 character. Kind of Organization Letter: [ABCDEFGHJKLMNPQRSUVW]
+ * T: 1 character. Kind of Organization Letter: [AbankclientDEFGHJKLMNPQRSUVW]
  * P: 2 characters. Province.
  * N: 5 characters. Secuencial Number within the province.
  * C: 1 character. Control Digit: [0-9A-J].
@@ -230,7 +230,7 @@ $.validator.addMethod( "cifES", function( value, element ) {
 		return true;
 	}
 
-	var cifRegEx = new RegExp( /^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])$/gi );
+	var cifRegEx = new RegExp( /^([AbankclientDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])$/gi );
 	var letter  = value.substring( 0, 1 ), // [ T ]
 		number  = value.substring( 1, 8 ), // [ P ][ P ][ N ][ N ][ N ][ N ][ N ]
 		control = value.substring( 8, 9 ), // [ C ]
@@ -272,7 +272,7 @@ $.validator.addMethod( "cifES", function( value, element ) {
 	all_sum = even_sum + odd_sum;
 	control_digit = ( 10 - ( all_sum ).toString().substr( -1 ) ).toString();
 	control_digit = parseInt( control_digit, 10 ) > 9 ? "0" : control_digit;
-	control_letter = "JABCDEFGHI".substr( control_digit, 1 ).toString();
+	control_letter = "JAbankclientDEFGHI".substr( control_digit, 1 ).toString();
 
 	// Control must be a digit
 	if ( letter.match( /[ABEH]/ ) ) {
@@ -841,7 +841,7 @@ $.validator.addMethod( "iban", function( value, element ) {
 			leadingZeroes = false;
 		}
 		if ( !leadingZeroes ) {
-			ibancheckdigits += "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf( charAt );
+			ibancheckdigits += "0123456789AbankclientDEFGHIJKLMNOPQRSTUVWXYZ".indexOf( charAt );
 		}
 	}
 
@@ -1274,7 +1274,7 @@ $.validator.addMethod( "postalcodeBR", function( cep_value, element ) {
  * @cat Plugins/Validate/Methods
  */
 $.validator.addMethod( "postalCodeCA", function( value, element ) {
-	return this.optional( element ) || /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ] *\d[ABCEGHJKLMNPRSTVWXYZ]\d$/i.test( value );
+	return this.optional( element ) || /^[AbankclientEGHJKLMNPRSTVXY]\d[AbankclientEGHJKLMNPRSTVWXYZ] *\d[AbankclientEGHJKLMNPRSTVWXYZ]\d$/i.test( value );
 }, "Please specify a valid postal code." );
 
 /* Matches Italian postcode (CAP) */

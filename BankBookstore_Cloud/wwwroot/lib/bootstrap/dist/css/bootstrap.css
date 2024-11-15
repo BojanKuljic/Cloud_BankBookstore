@@ -2027,24 +2027,24 @@ progress {
   --bs-table-bg: #e2e3e5;
   --bs-table-striped-bg: #d7d8da;
   --bs-table-striped-color: #000;
-  --bs-table-active-bg: #cbccce;
+  --bs-table-active-bg: #cbankclientcce;
   --bs-table-active-color: #000;
   --bs-table-hover-bg: #d1d2d4;
   --bs-table-hover-color: #000;
   color: #000;
-  border-color: #cbccce;
+  border-color: #cbankclientcce;
 }
 
 .table-success {
   --bs-table-bg: #d1e7dd;
   --bs-table-striped-bg: #c7dbd2;
   --bs-table-striped-color: #000;
-  --bs-table-active-bg: #bcd0c7;
+  --bs-table-active-bg: #bankclientd0c7;
   --bs-table-active-color: #000;
   --bs-table-hover-bg: #c1d6cc;
   --bs-table-hover-color: #000;
   color: #000;
-  border-color: #bcd0c7;
+  border-color: #bankclientd0c7;
 }
 
 .table-info {
@@ -4886,7 +4886,7 @@ textarea.form-control-lg {
 .alert-success {
   color: #0f5132;
   background-color: #d1e7dd;
-  border-color: #badbcc;
+  border-color: #badbankclientc;
 }
 .alert-success .alert-link {
   color: #0c4128;
@@ -4931,7 +4931,7 @@ textarea.form-control-lg {
 .alert-dark {
   color: #141619;
   background-color: #d3d3d4;
-  border-color: #bcbebf;
+  border-color: #bankclientbebf;
 }
 .alert-dark .alert-link {
   color: #101214;
@@ -5232,7 +5232,7 @@ textarea.form-control-lg {
 }
 .list-group-item-secondary.list-group-item-action:hover, .list-group-item-secondary.list-group-item-action:focus {
   color: #41464b;
-  background-color: #cbccce;
+  background-color: #cbankclientcce;
 }
 .list-group-item-secondary.list-group-item-action.active {
   color: #fff;
@@ -5246,7 +5246,7 @@ textarea.form-control-lg {
 }
 .list-group-item-success.list-group-item-action:hover, .list-group-item-success.list-group-item-action:focus {
   color: #0f5132;
-  background-color: #bcd0c7;
+  background-color: #bankclientd0c7;
 }
 .list-group-item-success.list-group-item-action.active {
   color: #fff;

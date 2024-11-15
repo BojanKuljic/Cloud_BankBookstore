@@ -7,6 +7,17 @@ namespace Common.Models
     {
         [DataMember]
         public string Id { get; set; }
+        [DataMember]
+        public string? FirstName { get; set; }
+
+        [DataMember] 
+        public string? LastName { get; set; }
+
+        [DataMember] 
+        public string? BankName { get; set; }
+
+        [DataMember]
+        public string? BuyerId { get; set; }
 
         [DataMember]
         public string BookId { get; set; }

@@ -11,6 +11,7 @@ namespace Bank
     internal sealed class Bank : StatefulService, IBank
     {
         private IReliableDictionary<string, BankClient> bankDictionary = null;
+
         public Bank(StatefulServiceContext context) : base(context) { }
 
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
@@ -39,28 +40,139 @@ namespace Bank
         }
 
         // IBank
-        public Task<IEnumerable<BankClient>> ListClients()
+        public async Task<IEnumerable<BankClient>> ListClients()
         {
-            throw new NotImplementedException();
+            var clients = new List<BankClient>();
+
+            using (var transaction = StateManager.CreateTransaction())
+            {
+                var enumerator = (await bankDictionary.CreateEnumerableAsync(transaction)).GetAsyncEnumerator();
+
+                while (await enumerator.MoveNextAsync(CancellationToken.None))
+                {
+                    var tmp = enumerator.Current.Value;
+                    clients.Add(tmp);
+                }
+            }
+            return clients;
         }
 
         // ITransaction
-        // Prepare - proverava da li klijent ima dovoljno novca
-        public Task<bool> Prepare(MyTransaction data)
+        // Prepare - checks if the client has enough money
+        public async Task<bool> Prepare(MyTransaction data)
         {
-            throw new NotImplementedException();
+            bool status = false;
+
+            BankClient bankclient = null;
+            var clients = await ListClients();
+            foreach (var client in clients)
+            {
+                if (client.Id == data.BuyerId)
+                {
+                    bankclient = client;
+                    break;
+                }
+            }
+
+            if (bankclient != null)
+            {
+
+                if (!bankclient.FirstName.Equals(data.FirstName) || !bankclient.LastName.Equals(data.LastName, StringComparison.Ordinal) || !bankclient.BankName.Equals(data.BankName))
+                {
+                    return false;
+                }
+
+                if (bankclient.MoneyAmount >= data.BookAmount)
+                {
+                    status = true;
+                }
+            }
+
+            return status;
         }
 
-        // Commit - skida novac sa računa
-        public Task<bool> Commit(MyTransaction data)
+        // Commit - deducts money from the account
+        public async Task<bool> Commit(MyTransaction data)
         {
-            throw new NotImplementedException();
+            bool status = false;
+
+            using (var transaction = StateManager.CreateTransaction())
+            {
+                try
+                {
+                    var clientResult = await bankDictionary.TryGetValueAsync(transaction, data.BuyerId);
+                    if (clientResult.HasValue)
+                    {
+                        var clientFromDictionary = clientResult.Value;
+                        BankClient newClient = clientFromDictionary;
+                        newClient.MoneyAmount -= data.TotalMoneyNeeded;
+
+                        if (newClient.MoneyAmount < 0)
+                        {
+                            status = false;
+                            return status;
+                        }
+
+                        try
+                        {
+                            await bankDictionary.TryUpdateAsync(transaction, newClient.Id, newClient, clientFromDictionary);
+                            await transaction.CommitAsync();
+                            status = true;
+                        }
+                        catch (Exception)
+                        {
+                            status = false;
+                            transaction.Abort();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    transaction.Abort();
+                    status = false;
+                }
+            }
+
+            return status;
         }
 
-        // Rollback - vraća novac na račun
-        public Task<bool> Rollback(MyTransaction data)
+        // Rollback - returns money to the account
+        public async Task<bool> Rollback(MyTransaction data)
         {
-            throw new NotImplementedException();
+            bool status = false;
+
+            using (var transaction = StateManager.CreateTransaction())
+            {
+                try
+                {
+                    var clientResult = await bankDictionary.TryGetValueAsync(transaction, data.BuyerId);
+                    if (clientResult.HasValue)
+                    {
+                        var clientFromDictionary = clientResult.Value;
+                        BankClient newClient = clientFromDictionary;
+                        newClient.MoneyAmount += data.TotalMoneyNeeded;
+
+                        try
+                        {
+                            await bankDictionary.TryUpdateAsync(transaction, newClient.Id, newClient, clientFromDictionary);
+                            await transaction.CommitAsync();
+                            status = true;
+                        }
+                        catch (Exception)
+                        {
+                            status = false;
+                            transaction.Abort();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    transaction.Abort();
+                    status = false;
+                }
+            }
+
+            return status;
         }
     }
 }

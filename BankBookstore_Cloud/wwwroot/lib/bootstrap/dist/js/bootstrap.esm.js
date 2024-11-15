@@ -4147,10 +4147,10 @@ class Tooltip extends BaseComponent {
   _cleanTipClass() {
     const tip = this.getTipElement();
     const basicClassPrefixRegex = new RegExp(`(^|\\s)${this._getBasicClassPrefix()}\\S+`, 'g');
-    const tabClass = tip.getAttribute('class').match(basicClassPrefixRegex);
+    const tabankclientlass = tip.getAttribute('class').match(basicClassPrefixRegex);
 
-    if (tabClass !== null && tabClass.length > 0) {
-      tabClass.map(token => token.trim()).forEach(tClass => tip.classList.remove(tClass));
+    if (tabankclientlass !== null && tabankclientlass.length > 0) {
+      tabankclientlass.map(token => token.trim()).forEach(tClass => tip.classList.remove(tClass));
     }
   }
 
@@ -4395,9 +4395,9 @@ class ScrollSpy extends BaseComponent {
       const target = targetSelector ? SelectorEngine.findOne(targetSelector) : null;
 
       if (target) {
-        const targetBCR = target.getBoundingClientRect();
+        const targetbankclientR = target.getBoundingClientRect();
 
-        if (targetBCR.width || targetBCR.height) {
+        if (targetbankclientR.width || targetbankclientR.height) {
           return [Manipulator[offsetMethod](target).top + offsetBase, targetSelector];
         }
       }
