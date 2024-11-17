@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Client.Models.BankClientModel>
+
+@{
+    ViewData["Title"] = "ListBanksClients";
+}
+
+<h1>List of Banks Clients</h1>
+
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BankName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BankAdress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BankMoneyAmount)
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.Id)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BankName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BankAdress) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BankMoneyAmount)
+                </td>
+                @*<td>
+            @Html.DisplayFor(modelItem => item.Id)
+            </td>*@
+                <td>
+                    @Html.ActionLink("Transfer money", "EnlistMoneyTransfer", "Banks", new { userSendId = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

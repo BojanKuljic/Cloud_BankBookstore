@@ -1,8 +1,30 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Bank_BookStore";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome Client on Bank and Bookstore aplication!</h1>
+    <p>Manage  with all books in BookStore and  with Banks Clients accounts with ease</p>
+    <p>Create your own transactions and buy book with safe online money transfer! Menage yours transactions EasY with RollBAck, Commit and Preapre Options!</p>
+
+    @if (User.Identity.IsAuthenticated)
+
+    {
+        <p>Welcome, @User.Identity.Name!</p>
+        <p>
+            <a class="btn btn-primary" href="/Bank/Index">View Banks</a>
+            <a class="btn btn-primary" href="/Book/Index">Browse Books</a>
+            <a class="btn btn-secondary" href="/Account/Logout">Logout</a>
+        </p>
+    }
+
+    else
+
+    {
+        <p>
+            <a class="btn btn-success" href="/Account/Login">Login</a>
+            or
+            <a class="btn btn-info" href="/Account/Register">Register</a> to get started.
+        </p>
+    }
 </div>

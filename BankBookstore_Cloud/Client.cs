@@ -1,25 +1,17 @@
-using System;
-using System.Collections.Generic;
+
 using System.Fabric;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
-using Microsoft.ServiceFabric.Data;
 
 namespace Client
 {
     /// <summary>
     /// The FabricRuntime creates an instance of this class for each service type instance.
     /// </summary>
-    internal sealed class Client : StatelessService
+    internal sealed class ClienT : StatelessService
     {
-        public Client(StatelessServiceContext context)
+        public ClienT(StatelessServiceContext context)
             : base(context)
         { }
 
@@ -44,21 +36,38 @@ namespace Client
                                     .UseContentRoot(Directory.GetCurrentDirectory())
                                     .UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.None)
                                     .UseUrls(url);
-                        builder.Services.AddControllersWithViews();
+                        
+                        // Add services to the container.
+                        builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+                        //builder.Services.AddControllersWithViews();
+                        builder.Services.AddMvc(option => option.EnableEndpointRouting = false);
+                        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+                        //builder.Services.AddEndpointsApiExplorer();
+                        //builder.Services.AddSwaggerGen();
+
                         var app = builder.Build();
-                        if (!app.Environment.IsDevelopment())
+                        
+                        // Configure the HTTP request pipeline.
+                        if (app.Environment.IsDevelopment())
                         {
-                        app.UseExceptionHandler("/Home/Error");
+                            app.UseDeveloperExceptionPage();
                         }
+                        else
+                        {
+                            app.UseExceptionHandler("/Home/Error");
+                            app.UseHsts();
+                        }
+
+
                         app.UseStaticFiles();
                         app.UseRouting();
+                        app.UseMvcWithDefaultRoute();
                         app.UseAuthorization();
-                        app.MapControllerRoute(
-                        name: "default",
-                        pattern: "{controller=Home}/{action=Index}/{id?}");
-                        
-                        return app;
 
+                        app.MapControllers();
+                        app.Run();
+
+                        return app;
                     }))
             };
         }

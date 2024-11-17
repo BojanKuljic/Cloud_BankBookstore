@@ -21,9 +21,9 @@ namespace Client
                 // an instance of the class is created in this host process.
 
                 ServiceRuntime.RegisterServiceAsync("ClientType",
-                    context => new Client(context)).GetAwaiter().GetResult();
+                    context => new ClienT(context)).GetAwaiter().GetResult();
 
-                ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(Client).Name);
+                ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(ClienT).Name);
 
                 // Prevents this host process from terminating so services keeps running. 
                 Thread.Sleep(Timeout.Infinite);
