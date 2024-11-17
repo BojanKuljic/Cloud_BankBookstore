@@ -17,7 +17,7 @@ namespace Common.Models
         public string? LastName { get; set; }
 
         [DataMember]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         //dodato Naknadno kao +1 polje za pol
         [DataMember]

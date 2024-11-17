@@ -2,8 +2,8 @@
 {
     public class EnlistPurchaseModel
     {
-        public long? BookId { get; set; }
+        public long BookId { get; set; }
 
-        public uint? Count { get; set; }
+        public uint Count { get; set; }
     }
 }

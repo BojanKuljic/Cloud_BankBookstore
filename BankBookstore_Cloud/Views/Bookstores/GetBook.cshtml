@@ -1,57 +1,19 @@
 ﻿@model Client.Models.BookModel
 
 @{
-    ViewData["Title"] = "Data of books";
+    ViewData["Title"] = "Get Book";
 }
 
-<h1>Datas of books</h1>
+<h2>Book Details</h2>
 
-
-@*<h4>BookViewModel</h4>*@
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="GetItem">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" readonly />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Author" class="control-label"></label>
-                <input asp-for="Author" class="form-control" readonly />
-                <span asp-validation-for="Author" class="text-danger"></span>
-            </div>
-           
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" readonly />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" readonly />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
-            <label asp-for="Id" class="control-label"></label>
-            <input asp-for="Id" class="form-control" />
-            <span asp-validation-for="Id" class="text-danger"></span>
-            </div>*@
-            @*<div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary" />
-            </div>*@
-        </form>
-    </div>
+<div>
+    <h3>Details for the book</h3>
+    <p><strong>Title:</strong> @Model.Title</p>
+    <p><strong>Author:</strong> @Model.Author</p>
+    <p><strong>Price:</strong> @Model.Price?.ToString("C")</p> <!-- Formatiranje cene u lokalnu valutu -->
+    <p><strong>Quantity:</strong> @Model.Quantity</p>
 </div>
 
-@*<div>
-    <a asp-action="Index">Back to List</a>
-</div>*@
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
+<div>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-primary">Back to Home</a>
+</div>

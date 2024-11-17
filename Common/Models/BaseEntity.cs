@@ -6,6 +6,6 @@ namespace Common.Models
     public class BaseEntity
     {
         [DataMember]
-        public long Id { get; set; }
+        public long? Id { get; set; }
     }
 }

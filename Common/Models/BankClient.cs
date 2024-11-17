@@ -13,7 +13,7 @@ namespace Common.Models
 
         //dodata adresa   mesto bankMembership
         [DataMember]
-        public double BankMoneyAmount { get; set; }
+        public double? BankMoneyAmount { get; set; }
        
     }
 }

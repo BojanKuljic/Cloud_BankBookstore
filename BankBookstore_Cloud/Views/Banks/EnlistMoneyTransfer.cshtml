@@ -1,0 +1,53 @@
+﻿@using Newtonsoft.Json
+@model Client.Models.EnlistMoneyTransferModel
+
+@{
+    ViewData["Title"] = "Enlist Money Transfer";
+}
+
+<h2>Enlist Money Transfer</h2>
+
+<form asp-action="EnlistMoneyTransfer" asp-controller="Banks" method="post">
+    <div class="form-group">
+        <label for="UserSendId">Sender User</label>
+        @Html.DropDownListFor(model => model.UserSendId, Model.AvailableSenders, "Select a sender", new { @class = "form-control", id = "UserSendId" })
+        <span asp-validation-for="UserSendId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="UserReceiveId">Receiver User</label>
+        @Html.DropDownListFor(model => model.UserReceiveId, Model.AvailableReceivers, "Select a receiver", new { @class = "form-control", id = "UserReceiveId" })
+        <span asp-validation-for="UserReceiveId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Amount">Amount</label>
+        <input type="number" id="Amount" name="Amount" class="form-control" />
+        <span asp-validation-for="Amount" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Transfer</button>
+</form>
+
+<div>
+    <a asp-action="ListBanksClients" class="btn btn-secondary">Back to Clients List</a>
+</div>
+
+<script>
+    const allClients = @Html.Raw(JsonConvert.SerializeObject(Model.AvailableSenders));
+
+    document.getElementById('UserSendId').addEventListener('change', function () {
+        const selectedSenderId = parseInt(this.value);
+
+        const filteredClients = allClients.filter(client => parseInt(client.Value) !== selectedSenderId);
+        const receiverDropdown = document.getElementById('UserReceiveId');
+
+        receiverDropdown.innerHTML = '<option value="">Select a receiver</option>';
+        filteredClients.forEach(client => {
+            const option = document.createElement('option');
+            option.value = client.Value;
+            option.textContent = client.Text;
+            receiverDropdown.appendChild(option);
+        });
+    });
+</script>

@@ -6,10 +6,10 @@ namespace Common.Interfaces
     {
         Task<List<string>> ListAvailableBooks();
 
-        Task<string> EnlistPurchase(long bookId, uint count);
+        Task<string> EnlistPurchase(long? bookId, uint? count);
 
-        Task<string> GetBookPrice(long bookId);
+        Task<string> GetBookPrice(long? bookId);
 
-        Task<string> GetBook(long bookId);
+        Task<string> GetBook(long? bookId);
     }
 }

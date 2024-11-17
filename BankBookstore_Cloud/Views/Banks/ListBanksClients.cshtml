@@ -1,0 +1,52 @@
+﻿@model List<Client.Models.BankClientModel>
+
+@{
+    ViewData["Title"] = "Bank Clients List";
+}
+
+@{
+    if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+}
+
+
+<h2>Bank Clients List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Bank Name</th>
+            <th>Address</th>
+            <th>Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model)
+        {
+            <tr>
+                <td>@client.FirstName</td>
+                <td>@client.LastName</td>
+                <td>@client.BankName</td>
+                <td>@client.BankAdress</td>
+                <td>@client.BankMoneyAmount</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="EnlistMoneyTransfer" class="btn btn-primary">Make Money Transfer</a>
+</div>

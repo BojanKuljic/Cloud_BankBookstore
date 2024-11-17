@@ -42,21 +42,28 @@ namespace Client.Controllers
         [Route("EnlistPurchase")]
         public async Task<IActionResult> EnlistPurchase([FromForm] EnlistPurchaseModel model)
         {
+            // Kreiranje proxy servisa za validaciju
             IValidation? validationProxy = ServiceProxy.Create<IValidation>(new Uri("fabric:/Cloud_BankBookstore/Validation"));
 
+            // Poziv validacije
             string result = await validationProxy.EnlistPurchase(model.BookId, model.Count);
 
-            if (result is null)
+            if (result == null)
             {
-                return RedirectToAction("Error", "Home", new { errorMessage = "Cannot purchase." });
+                TempData["ErrorMessage"] = "Kupovina nije uspela. Pokušajte ponovo.";
+                return RedirectToAction("Error", "Home");
             }
 
+            TempData["SuccessMessage"] = "Uspesna kupovina!";
+
+            // Preusmeravanje na listu dostupnih knjiga
             return RedirectToAction("ListAvailableBooks", "Bookstores");
         }
 
+
         [HttpGet]
-        [Route("GetItemPrice/{id}")]
-        public async Task<IActionResult> GetBookPrice(long id)
+        [Route("GetBookPrice/{id}")]
+        public async Task<IActionResult> GetBookPrice(long? id)
         {
             var validationProxy = ServiceProxy.Create<IValidation>(new Uri("fabric:/Cloud_BankBookstore/Validation"));
 
@@ -74,7 +81,7 @@ namespace Client.Controllers
 
         [HttpGet]
         [Route("GetBook/{id}")]
-        public async Task<IActionResult> GetBook(long id)
+        public async Task<IActionResult> GetBook(long? id)
         {
             var validationProxy = ServiceProxy.Create<IValidation>(new Uri("fabric:/Cloud_BankBookstore/Validation"));
 

@@ -8,13 +8,13 @@ using Microsoft.ServiceFabric.Services.Remoting.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 using Newtonsoft.Json;
 using System.Fabric;
-//using ITransaction = Microsoft.ServiceFabric.Data.ITransaction;
+using ITransaction = Microsoft.ServiceFabric.Data.ITransaction;
 
 namespace Bank
 {
     internal sealed class Bank : StatefulService, IBank, ITransactioS
     {
-        private IReliableDictionary<string, BankClient> bankClientsDictionary;
+        private IReliableDictionary<long, BankClient>? bankClientsDictionary;
 
         public Bank(StatefulServiceContext context) : base(context) { }
 
@@ -22,7 +22,7 @@ namespace Bank
 
         private async Task InitializeClientDictionaryAsync()
         {
-            bankClientsDictionary = await StateManager.GetOrAddAsync<IReliableDictionary<string, BankClient>>("bankClientsDictionary");
+            bankClientsDictionary = await StateManager.GetOrAddAsync<IReliableDictionary<long, BankClient>>("bankClientsDictionary");
         }
 
 
@@ -44,7 +44,7 @@ namespace Bank
                     BankName = "NLB Bank",BankAdress="Bulevar Oslobodjenja 55", BankMoneyAmount = 2000.00 },
 
              new BankClient() { Id = 5, FirstName = "Visnja", LastName = "Sekulic", DateOfBirth = new DateTime(2003, 2, 21), Gender= "Z",
-                    BankName = "UniCredit Bank",BankAdress=" Cirpanoca 36", BankMoneyAmount = 900.00 },
+                    BankName = "UniCredit Bank",BankAdress=" Cirpanova 36", BankMoneyAmount = 900.00 },
 
 
             };
@@ -52,7 +52,7 @@ namespace Bank
             using (var transaction = StateManager.CreateTransaction())
             {
                 foreach (BankClient client in bankClients)
-                    await bankClientsDictionary!.AddOrUpdateAsync(transaction, client.Id!.ToString(), client, (k, v) => v);
+                    await bankClientsDictionary!.AddOrUpdateAsync(transaction, client.Id!.Value, client, (k, v) => v);
 
                 //await transaction.CommitAsync();
                 await FinishTransaction(transaction);
@@ -76,18 +76,18 @@ namespace Bank
 
 
 
-        public async Task<string> EnlistMoneyTransfer(long userSend, long userReceive, double amount)
+        public async Task<string> EnlistMoneyTransfer(long? userSend, long? userReceive, double? amount)
         {
 
             using (var transaction = StateManager.CreateTransaction())
             {
                 //Value sam pretvorio u tostring
-                ConditionalValue<BankClient> clientToSend = await bankClientsDictionary!.TryGetValueAsync(transaction, userSend!.ToString());
-                ConditionalValue<BankClient> clientToReceive = await bankClientsDictionary!.TryGetValueAsync(transaction, userReceive!.ToString());
+                ConditionalValue<BankClient> clientToSend = await bankClientsDictionary!.TryGetValueAsync(transaction, userSend!.Value);
+                ConditionalValue<BankClient> clientToReceive = await bankClientsDictionary!.TryGetValueAsync(transaction, userReceive!.Value);
 
                 var transactionContext = new TransactionDatas { BankByClientToSend = clientToSend, BankClientToReceive = clientToReceive };
 
-                if (!await Prepare(transactionContext, amount!.ToString()))
+                if (!await Prepare(transactionContext, amount!.Value))
                 {
                     return null!;
                 }
@@ -98,8 +98,8 @@ namespace Bank
                 clientToSendUpdate.BankMoneyAmount -= amount;
                 clientToReceiveUpdate.BankMoneyAmount += amount;
 
-                await bankClientsDictionary.TryUpdateAsync(transaction, userSend!.ToString(), clientToSendUpdate, clientToSend.Value);
-                await bankClientsDictionary.TryUpdateAsync(transaction, userReceive!.ToString(), clientToReceiveUpdate, clientToReceive.Value);
+                await bankClientsDictionary.TryUpdateAsync(transaction, userSend!.Value, clientToSendUpdate, clientToSend.Value);
+                await bankClientsDictionary.TryUpdateAsync(transaction, userReceive!.Value, clientToReceiveUpdate, clientToReceive.Value);
 
                 //await transaction.CommitAsync();
 

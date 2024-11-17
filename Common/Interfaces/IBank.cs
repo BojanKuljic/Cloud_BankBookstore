@@ -8,6 +8,6 @@ namespace Common.Interfaces
         //dodao Banks
         Task<List<string>> ListBanksClients();
 
-        Task<string> EnlistMoneyTransfer(long userSend, long userReceive, double amount);
+        Task<string> EnlistMoneyTransfer(long? userSend, long? userReceive, double? amount);
     }
 }

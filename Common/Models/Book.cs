@@ -8,15 +8,15 @@ namespace Common.Models
 
         //Izbacio sam broj strana i godinu izdavanja
         [DataMember]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         [DataMember]
-        public string Author { get; set; }
+        public string? Author { get; set; }
 
         [DataMember]
-        public double Price { get; set; }
+        public double? Price { get; set; }
 
         [DataMember]
-        public uint Quantity { get; set; }      // Broj knjiga na stanju
+        public uint? Quantity { get; set; }      // Broj knjiga na stanju
     }
 }
