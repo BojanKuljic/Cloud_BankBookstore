@@ -6,6 +6,6 @@ namespace Client.Models
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
-        public string ErrorMessage { get; set; }
+        public string? ErrorMessage { get; set; }
     }
 }
