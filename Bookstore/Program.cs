@@ -23,6 +23,7 @@ namespace Bookstore
                 ServiceRuntime.RegisterServiceAsync("BookstoreType",
                     context => new Bookstore(context)).GetAwaiter().GetResult();
 
+
                 ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(Bookstore).Name);
 
                 // Prevents this host process from terminating so services keep running.
