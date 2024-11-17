@@ -14,13 +14,13 @@ namespace Common.Interfaces
         Task<List<string>> ListAvailableBooks();
 
         // Evidentiraj kupovinu
-        Task<string> EnlistPurchase(long bookId, uint count);
+        Task<string> EnlistPurchase(long? bookId, uint? count);
 
         // Preuzmi cenu stavke
-        Task<string> GetBookPrice(long bookId);
+        Task<string> GetBookPrice(long?  bookId);
 
         // Preuzmi stavku
-        Task<string> GetBook(long bookId);
+        Task<string> GetBook(long? bookId);
 
         // Lista korisnika
 
@@ -28,6 +28,6 @@ namespace Common.Interfaces
         Task<List<string>> ListBanksClients();
 
         // Evidentiraj transfer novca
-        Task<string> EnlistMoneyTransfer(long userSend, long userReceive, double amount);
+        Task<string> EnlistMoneyTransfer(long?  userSend, long? userReceive, double? amount);
     }
 }

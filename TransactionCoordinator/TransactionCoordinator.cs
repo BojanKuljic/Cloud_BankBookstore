@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
+
 using System.Fabric;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+using Common;
 using Common.Interfaces;
+using Microsoft.ServiceFabric.Services.Client;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
+using Microsoft.ServiceFabric.Services.Remoting.Client;
+using Microsoft.ServiceFabric.Services.Remoting.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 
 namespace TransactionCoordinator
@@ -23,34 +23,96 @@ namespace TransactionCoordinator
             : base(context)
         { }
 
-        public Task<string> EnlistMoneyTransfer(long userSend, long userReceive, double amount)
+
+        public async Task<List<string>> ListAvailableBooks()
         {
-            throw new NotImplementedException();
+
+            IBookstore? bookstoreProxy = ServiceProxy.Create<IBookstore>(new Uri(bookstorePath), new ServicePartitionKey((int)PartiotionKeys.One));
+
+            try
+            {
+                return await bookstoreProxy.ListAvailableBooks();
+            }
+            catch (Exception)
+            {
+                return null!;
+            }
         }
 
-        public Task<string> EnlistPurchase(long bookId, uint count)
+        public async Task<string> EnlistPurchase(long? bookId, uint? count)
         {
-            throw new NotImplementedException();
+            IBookstore? bookstoreProxy = ServiceProxy.Create<IBookstore>(new Uri(bookstorePath), new ServicePartitionKey((int)PartiotionKeys.One));
+
+            try
+            {
+                return await bookstoreProxy.EnlistPurchase(bookId!.Value, count!.Value);
+            }
+            catch (Exception)
+            {
+                return null!;
+            }
         }
 
-        public Task<string> GetBook(long bookId)
+        public async Task<string> GetBook(long? bookId)
         {
-            throw new NotImplementedException();
+
+            IBookstore? bookstoreProxy = ServiceProxy.Create<IBookstore>(new Uri(bookstorePath), new ServicePartitionKey((int)PartiotionKeys.One));
+
+            try
+            {
+                return await bookstoreProxy.GetBook(bookId!.Value);
+            }
+            catch (Exception)
+            {
+                return null!;
+            }
         }
 
-        public Task<string> GetBookPrice(long bookId)
+        public async Task<string> GetBookPrice(long? bookId)
         {
-            throw new NotImplementedException();
+            IBookstore? bookstoreProxy = ServiceProxy.Create<IBookstore>(new Uri(bookstorePath), new ServicePartitionKey((int)PartiotionKeys.One));
+
+            try
+            {
+                return await bookstoreProxy.GetBookPrice(bookId!.Value);
+            }
+            catch (Exception)
+            {
+                return null!;
+            }
         }
 
-        public Task<List<string>> ListAvailableBooks()
+     
+
+        //IBANK Implementation
+
+        public async Task<List<string>> ListBanksClients()
         {
-            throw new NotImplementedException();
+            IBank? bankProxy = ServiceProxy.Create<IBank>(new Uri(bankPath), new ServicePartitionKey((int)PartiotionKeys.Two));
+
+            try
+            {
+                return await bankProxy.ListBanksClients();
+            }
+            catch (Exception)
+            {
+                return null!;
+            }
         }
 
-        public Task<List<string>> ListBanksClients()
+
+        public async Task<string> EnlistMoneyTransfer(long? userSend, long? userReceive, double? amount)
         {
-            throw new NotImplementedException();
+            IBank? bankProxy = ServiceProxy.Create<IBank>(new Uri(bankPath), new ServicePartitionKey((int)PartiotionKeys.Two));
+
+            try
+            {
+                return await bankProxy.EnlistMoneyTransfer(userSend!.Value, userReceive!.Value, amount!.Value);
+            }
+            catch (Exception)
+            {
+                return null!;
+            }
         }
 
         /// <summary>

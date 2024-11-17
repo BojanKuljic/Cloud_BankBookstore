@@ -7,10 +7,9 @@ namespace Common.Interfaces
         Task<bool> Prepare(TransactionDatas context, object value);
 
         //ako je sve spremno  posalji novac
-        Task Commit(ITransactioS transaction);
+        Task Commit(Microsoft.ServiceFabric.Data.ITransaction transaction);
 
         //ako nesto nije uspelo vrati u pocetno stanje
-        Task RollBack(ITransactioS transaction);
-       
+        Task RollBack(Microsoft.ServiceFabric.Data.ITransaction transaction);
     }
 }

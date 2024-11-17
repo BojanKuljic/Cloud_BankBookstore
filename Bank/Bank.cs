@@ -55,7 +55,7 @@ namespace Bank
                     await bankClientsDictionary!.AddOrUpdateAsync(transaction, client.Id!.ToString(), client, (k, v) => v);
 
                 //await transaction.CommitAsync();
-                await FinishTransaction((ITransactioS)transaction);
+                await FinishTransaction(transaction);
             }
 
             var clientsJson = new List<string>();
@@ -105,7 +105,7 @@ namespace Bank
 
                 //return string.Empty;
 
-                return await FinishTransaction((ITransactioS)transaction);
+                return await FinishTransaction(transaction);
             }
         }
 
@@ -134,7 +134,7 @@ namespace Bank
 
 
 
-        public async Task<string> FinishTransaction(ITransactioS transaction)
+        public async Task<string> FinishTransaction(ITransaction transaction)
         {
             try
             {
@@ -153,14 +153,14 @@ namespace Bank
             return this.CreateServiceRemotingReplicaListeners();
         }
 
-        public Task Commit(ITransactioS transaction)
+        public async Task Commit(ITransaction transaction)
         {
-            throw new NotImplementedException();
+            await transaction.CommitAsync();
         }
 
-        public Task RollBack(ITransactioS transaction)
+        public async Task RollBack(ITransaction transaction)
         {
-            throw new NotImplementedException();
+            transaction.Abort();
         }
 
     }

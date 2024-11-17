@@ -43,7 +43,7 @@ namespace Bookstore
                     await _bookDictionary!.AddOrUpdateAsync(transaction, book.Id!.ToString(), book, (k, v) => v);
 
                 //await transaction.CommitAsync();
-                await FinishTransaction((ITransactioS)transaction);
+                await FinishTransaction(transaction);
             }
 
             var booksJson = new List<string>();
@@ -86,7 +86,7 @@ namespace Bookstore
 
                 //return string.Empty;
 
-                return await FinishTransaction((ITransactioS)transaction);
+                return await FinishTransaction(transaction);
             }
         }
 
@@ -140,19 +140,19 @@ namespace Bookstore
 
 
       
-        public async Task Commit(ITransactioS transaction)
+        public async Task Commit(Microsoft.ServiceFabric.Data.ITransaction transaction)
         {
-            throw new NotImplementedException();
-           // await transaction.CommitAsync();
+           // throw new NotImplementedException();
+            await transaction.CommitAsync();
         }
 
-        public async Task RollBack(ITransactioS transaction)
+        public async Task RollBack(Microsoft.ServiceFabric.Data.ITransaction transaction)
         {
-            throw new NotImplementedException();
-            //transaction.Abort();
+           // throw new NotImplementedException();
+            transaction.Abort();
         }
 
-        public async Task<string> FinishTransaction(ITransactioS transaction)
+        public async Task<string> FinishTransaction(Microsoft.ServiceFabric.Data.ITransaction transaction)
         {
             try
             {
