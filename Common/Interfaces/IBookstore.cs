@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Common.Models;
+﻿using Microsoft.ServiceFabric.Services.Remoting;
 
 namespace Common.Interfaces
 {
-    public interface IBookstore : ITransaction
+    public interface IBookstore : IService
     {
-        Task<IEnumerable<Book>> ListAvailableItems();
-
-        Task<double> GetItemPrice(string bookId);
+        Task<List<string>> ListAvailableBooks();
 
         Task<string> EnlistPurchase(long bookId, uint count);
 
-        Task<string> GetItem(long bookId);
+        Task<string> GetBookPrice(long bookId);
+
+        Task<string> GetBook(long bookId);
     }
 }

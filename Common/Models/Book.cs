@@ -3,11 +3,10 @@
 namespace Common.Models
 {
     [DataContract]
-    public class Book
+    public class Book : BaseEntity
     {
-        [DataMember]
-        public string Id { get; set; }
 
+        //Izbacio sam broj strana i godinu izdavanja
         [DataMember]
         public string Title { get; set; }
 

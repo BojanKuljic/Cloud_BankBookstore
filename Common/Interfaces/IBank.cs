@@ -1,9 +1,13 @@
 ﻿using Common.Models;
+using Microsoft.ServiceFabric.Services.Remoting;
 
 namespace Common.Interfaces
 {
-    public interface IBank : ITransaction
+    public interface IBank : IService
     {
-        Task<IEnumerable<BankClient>> ListClients();
+        //dodao Banks
+        Task<List<string>> ListBanksClients();
+
+        Task<string> EnlistMoneyTransfer(long userSend, long userReceive, double amount);
     }
 }

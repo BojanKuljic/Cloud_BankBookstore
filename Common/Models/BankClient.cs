@@ -3,21 +3,17 @@
 namespace Common.Models
 {
     [DataContract]
-    public class BankClient
+    public class BankClient : Human
     {
-        public object BankName;
+        [DataMember]
+        public string? BankName { get; set; }
 
         [DataMember]
-        public string Id { get; set; }       // Account number
+        public string? BankAdress { get; set; }
 
+        //dodata adresa   mesto bankMembership
         [DataMember]
-        public string FirstName { get; set; }
-
-        [DataMember]
-        public string LastName { get; set; }
-
-        [DataMember]
-        public double MoneyAmount { get; set; }
+        public double BankMoneyAmount { get; set; }
        
     }
 }

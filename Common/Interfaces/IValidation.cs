@@ -2,20 +2,31 @@
 
 
 namespace Common.Interfaces
-{
+{   
     public interface IValidation : IService
     {
-        Task<string> GetItem(long bookId);
+        // Lista dostupnih stavki vjv. knjiga
 
-        Task<string> GetItemPrice(long bookId);
+        //ZAMENIO SAM ITEMS ZA BOOKS
+        Task<List<string>> ListAvailableBooks();
 
-        Task<List<string>> ListClients();
-
-        Task<List<string>> ListAvailableItems();
-
+        // Evidentiraj kupovinu
         Task<string> EnlistPurchase(long bookId, uint count);
 
-        Task<string> EnlistMoneyTransfer(long userSend, long userReceive, double amount);
+        // Preuzmi cenu stavke
+        Task<string> GetBookPrice(long bookId);
 
+        // Preuzmi stavku
+        Task<string> GetBook(long bookId);
+
+        // Lista korisnika
+
+        //DODAO SAM BANKS ISPRED CLIENTS
+        Task<List<string>> ListBanksClients();
+
+        // Evidentiraj transfer novca
+        Task<string> EnlistMoneyTransfer(long userSend, long userReceive, double amount);
     }
 }
+
+

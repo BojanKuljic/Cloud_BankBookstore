@@ -5,19 +5,29 @@ namespace Common.Interfaces
 {
     public interface ITransactionCoordinator : IService
     {
+        //Kordinator transakcija koji ce vrsiti validaciju i provere
+        //da li je sve ispunjeno i uredu
 
-        Task<bool> CoordinateTransaction(MyTransaction data);
+        // Lista dostupnih stavki vjv. knjiga
 
-        Task<string> GetItem(long? bookId);
+        //ZAMENIO SAM ITEMS ZA BOOKS
+        Task<List<string>> ListAvailableBooks();
 
-        Task<string> GetItemPrice(long bookId);
+        // Evidentiraj kupovinu
+        Task<string> EnlistPurchase(long bookId, uint count);
 
-        Task<List<string>> ListClients();
+        // Preuzmi cenu stavke
+        Task<string> GetBookPrice(long bookId);
 
-        Task<List<string>> ListAvailableItems();
+        // Preuzmi stavku
+        Task<string> GetBook(long bookId);
 
-        Task<string> EnlistPurchase(long bookId, uint count);    
+        // Lista korisnika
 
+        //DODAO SAM BANKS ISPRED CLIENTS
+        Task<List<string>> ListBanksClients();
+
+        // Evidentiraj transfer novca
         Task<string> EnlistMoneyTransfer(long userSend, long userReceive, double amount);
     }
 }
