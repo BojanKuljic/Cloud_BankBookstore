@@ -41,6 +41,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Bank\Bank.csproj" />
     <ProjectReference Include="..\Bookstore\Bookstore.csproj" />
+    <ProjectReference Include="..\TransactionCoordinator\TransactionCoordinator.csproj" />
     <ProjectReference Include="..\Validation\Validation.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
